@@ -1,0 +1,210 @@
+//背景设置
+.setBg (@height,@imgName,@paddingTop) {
+    width: 10rem;
+    height: @height;
+    background: url("../img/@{imgName}") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    padding-top: @paddingTop;
+    box-sizing: border-box;
+}
+//设置rule背景
+.ruleBg (@height,@imgName,@width,@height1,@paddingTop:0rem){ 
+    width: 10rem;
+    height: @height;
+    background: url("../img/@{imgName}") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    padding-top: @paddingTop;
+    box-sizing: border-box;
+    .back {
+        display: block;
+        width: @width;
+        height: @height1;
+        margin: 0 auto;
+    }
+}
+//黑色背景
+.blackBg(@zIndex: 98) {
+    width: 10rem;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -5rem;
+    z-index: @zIndex;
+}
+//刷新按钮
+.res (@width:1.4rem,@top:5rem,@right:0rem){
+    width: @width;
+    position: fixed;
+    top: @top;
+    right: @right;
+    z-index: 50;
+}
+//设置字体与颜色
+.sc (@size,@color){
+    font-size: @size;
+    color: @color;
+}
+//设置滚动
+.overflowS {
+    overflow: scroll;
+    -webkit-overflow-scrolling : touch;
+}
+//设置超出部分...
+.overflowDot {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+//设置文本上下左右居中.
+.textC (@height) {
+    line-height: @height;
+    text-align: center;
+}
+//设置左右居中
+.marginC {
+    margin: 0 auto;
+}
+//设置position
+.postl(@type,@s,@c) {
+    position: @type;
+    top: @s;
+    left: @c;
+}
+.postr(@type,@s,@c) {
+    position: @type;
+    top: @s;
+    right: @c;
+}
+.posbl(@type,@s,@c) {
+    position: @type;
+    bottom: @s;
+    left: @c;
+}
+.posbr(@type,@s,@c) {
+    position: @type;
+    bottom: @s;
+    right: @c;
+}
+//position设置上下左右居中
+.posC (@type: absolute){
+    position: @type;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+}
+//设置position top  left 为50%
+.posB (@type: absolute) {
+    position: @type;
+    top: 50%;
+    left: 50%;
+}
+
+.pop(@width,@height,@imgname) {
+    width: @width;
+    height: @height;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -(@width / 2 );
+    margin-top: -(@height / 2 );
+    background: url("../img/@{imgnage}") no-repeat;
+    background-size: 100% 100%;
+    z-index: 99;
+}
+
+.bg(@imgnage) {
+    background: url("../img/@{imgnage}") no-repeat;
+    background-size: 100% 100%;
+}
+
+
+@-webkit-keyframes wiggle {
+    10% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    20% {
+        -webkit-transform: rotate(-3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    30% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    40% {
+        -webkit-transform: rotate(-3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    50% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    60% {
+        -webkit-transform: rotate(-3deg) scale(1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    70% {
+        -webkit-transform: rotate(0deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(0deg) scale(1);
+    }
+    to {
+        -webkit-transform: rotate(0deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(0deg) scale(1);
+    }
+}
+@keyframes wiggle {
+    10% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    20% {
+        -webkit-transform: rotate(-3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    30% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    40% {
+        -webkit-transform: rotate(-3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    50% {
+        -webkit-transform: rotate(3deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(3deg) scale(1.1);
+    }
+    60% {
+        -webkit-transform: rotate(-3deg) scale(1.1);
+        transform: rotate(-3deg) scale(1.1);
+    }
+    70% {
+        -webkit-transform: rotate(0deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(0deg) scale(1);
+    }
+    to {
+        -webkit-transform: rotate(0deg) scale3d(1.1,1.1,1.1);
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+.rule-btn {
+    width: 1.15rem;
+    position: fixed;
+    right: 0.15rem;
+    top: 5.5rem;
+    z-index: 50;
+    animation-name: wiggle;
+	-webkit-animation-name: wiggle;	
+	animation-duration: 2s;	
+	-webkit-animation-duration: 2s;
+	animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}

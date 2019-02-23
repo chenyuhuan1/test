@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>带你去旅行</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script type="text/javascript" src="js/fsize.js"></script>
+	</head>
+	<body>
+		<div class="error">
+
+		</div>
+  </body>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script>
+    $(function () {
+      var bbb=location.href;
+      function url_get_params(url_path){
+          var url = url_path;
+          var theRequest = new Object();
+          if (url.indexOf("?") != -1) {
+              var str = url.substr(url.indexOf("?")+1);
+              strs = str.split("&");
+              for(var i = 0; i < strs.length; i ++) {
+                  theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+              }
+          }
+          return theRequest;
+      }
+      var data = url_get_params(bbb);
+      console.log(decodeURI(data.info));
+      $(".error").html(data.info);
+    });
+  </script>
+</html>

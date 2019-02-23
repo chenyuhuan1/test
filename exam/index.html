@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-trselectlucent">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="wap-font-scale" content="no">
+    <title>压寨</title>
+    <script type="text/javascript" src="js/in.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script type="text/javascript" src="js/fsize.js"></script>
+</head>
+<body style="background: #f5f5f5;">
+    <div id="app">
+        <div v-if="show">
+            <div class="info">
+                <div class="name">姓名：{{name}}</div>
+                <div class="position">职位：{{position}}</div>
+            </div>
+            <div class="row">
+                <div class="tit">你的性别</div>
+                <div class="sel-box">
+                    <div class="sel" :class="{'seled': sex == 1}" @click="sex = 1">男</div>
+                </div>
+                <div class="sel-box">
+                    <div class="sel" :class="{'seled': sex == 0}" @click="sex = 0">女</div> 
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row" v-for="(l,index) in question">
+                <div class="tit">{{index + 1}}、{{l.tit}}</div>
+                <div class="sel-box">
+                    <div class="sel" :class="{'seled': l.select == 2}" @click="sel1(index,2)">是</div>
+                </div>
+                <div class="sel-box">
+                    <div class="sel" :class="{'seled': l.select == 0}" @click="sel1(index,0)">不是</div> 
+                </div>
+                <div class="sel-box">
+                    <div class="sel" :class="{'seled': l.select == 1}" @click="sel1(index,1)">说不清</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row row2" v-for="(l,index) in question2">
+                <div class="tit tit2">{{index + 1}}、{{l.tit}}</div>
+                <div class="check-box">
+                    <div class="check" :class="{'checked': l.select == 1}" @click="sel2(index,1)">A、{{l.a}}</div>
+                    <div class="check" :class="{'checked': l.select == 2}" @click="sel2(index,2)">B、{{l.b}}</div>
+                    <div class="check" :class="{'checked': l.select == 3}" @click="sel2(index,3)">C、{{l.c}}</div>
+                    <div class="check" :class="{'checked': l.select == 4}" @click="sel2(index,4)">D、{{l.d}}</div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="sub" @click="sub()">提 交</div>
+        </div>
+        <div v-else class="error">{{msg}}</div>
+    </div>
+</body>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                sex: '-1',
+                position: '',
+                hash: '',
+                show: true,
+                msg: '',
+                question: [
+                    {tit: '满脑子创业，并有所成就',select:-1,alter:0},
+                    {tit: '我比其他人会理财，会让钱生钱',select:-1,alter:0},
+                    {tit: '我比其他的朋友或同学收入高',select:-1,alter:0},
+                    {tit: '我有独特的项目，形成行动力',select:-1,alter:0},
+                    {tit: '我对末来的事情分析比较准',select:-1,alter:0},
+                    {tit: '我为团队的成功可以得罪人',select:-1,alter:0},
+                    {tit: '我善于外交',select:-1,alter:0},
+                    {tit: '我经常做而不是经常说',select:-1,alter:0},
+                    {tit: '我很在意营养，且不多吃',select:-1,alter:0},
+                    {tit: '我平均睡眠不少于七小时',select:-1,alter:0},
+                    {tit: '我很平淡地看待钱',select:-1,alter:0},
+                    {tit: '我时常忘记苦恼的事',select:-1,alter:0},
+                    {tit: '我没有仇人，不恨人，不报怨社会制度',select:-1,alter:0},
+                    {tit: '我每周运动不少于2小时',select:-1,alter:0},
+                    {tit: '我可以为了身体停下工作',select:-1,alter:0},
+                    {tit: '我明白不良习惯对身体的危害',select:-1,alter:0},
+                    {tit: '我认为生命是艳丽的着装可以与众不同',select:-1,alter:0},
+                    {tit: '我不与朋友联系简直不能生活',select:-1,alter:0},
+                    {tit: '我知道很多的时尚品牌',select:-1,alter:0},
+                    {tit: '我经常参加娱乐活动',select:-1,alter:0},
+                    {tit: '我身上至少有两件饰品',select:-1,alter:0},
+                    {tit: '我对一物品动情即买之',select:-1,alter:0},
+                    {tit: '我借钱一年不少于一次',select:-1,alter:0},
+                    {tit: '我对度假和旅行比较感兴趣',select:-1,alter:0},
+                    {tit: '我想有更多的压力，只要事业有做得更好的可能',select:-1,alter:0},
+                    {tit: '我强调付出，有些时候甚至大过于强调收入',select:-1,alter:0},
+                    {tit: '我认为只要为项目发展着想，突破制度也有必要',select:-1,alter:0},
+                    {tit: '我想更长的人生时间在工作中度过',select:-1,alter:0},
+                    {tit: '我常常为公司的发展写出报告或文字',select:-1,alter:0},
+                    {tit: '我常常对公司的发展谈出看法',select:-1,alter:0},
+                    {tit: '我没有吃过回扣等公司严防的事情',select:-1,alter:0},
+                    {tit: '我经常做家务或公益的事务在别人没有要求的情况下',select:-1,alter:0},
+                    {tit: '我与别人的对话是为了影响或控制别人',select:-1,alter:0},
+                    {tit: '我没有对别人进行感情式的打分',select:-1,alter:0},
+                    {tit: '我觉得拍马屁不会有什么效果',select:-1,alter:0},
+                    {tit: '我曾经控制过混乱的局面',select:-1,alter:0},
+                    {tit: '我喜欢人力资源管理的工作胜于研究和技术',select:-1,alter:0},
+                    {tit: '我想做高级管理者，让大家因为我的领导而感到快乐',select:-1,alter:0},
+                    {tit: '我喜欢哲学，社会学，宗教等学科',select:-1,alter:0},
+                    {tit: '我经常处理其他人的工作分配，并让他们毫无怨言',select:-1,alter:0},
+                    {tit: '我喜欢物理，化学，生物等学科',select:-1,alter:0},
+                    {tit: '我有过特殊的创意并尝试有效果',select:-1,alter:0},
+                    {tit: '我感觉自己一定会拥有胜过他人的产品技术研究',select:-1,alter:0},
+                    {tit: '我学习能力很强，并精通某一方面',select:-1,alter:0},
+                    {tit: '我在意工作的兴趣甚至大于在意工作的回报',select:-1,alter:0},
+                    {tit: '我经常因思考或工作常常忘记时间',select:-1,alter:0},
+                    {tit: '我喜欢科普、地理类的栏目',select:-1,alter:0},
+                    {tit: '大家都说我逻辑思维能力强',select:-1,alter:0},
+                    {tit: '我认为家是第一位的',select:-1,alter:0},
+                    {tit: '我工作不是为了钱，而是为了情感',select:-1,alter:0},
+                    {tit: '我几乎对亲近的人不说假话',select:-1,alter:0},
+                    {tit: '我曾经为了爱失去了很多',select:-1,alter:0},
+                    {tit: '我认为承诺比生命更重要',select:-1,alter:0},
+                    {tit: '我会因为情感放弃工作的城市',select:-1,alter:0},
+                    {tit: '我时常想起初恋，和小时候的岁月',select:-1,alter:0},
+                    {tit: '我发现对我大的激励是情感而非利益',select:-1,alter:0},
+                    {tit: '我经常原谅别人',select:-1,alter:0},
+                    {tit: '我认为身后有很多追随者',select:-1,alter:0},
+                    {tit: '我认为自己有品位，从不说脏话',select:-1,alter:0},
+                    {tit: '我是曾经在某个自己的强项上倾力教过别人',select:-1,alter:0},
+                    {tit: '我出席过一些名流活动',select:-1,alter:0},
+                    {tit: '我从不拿不属于自己的东西',select:-1,alter:0},
+                    {tit: '我曾经有教别人做好事',select:-1,alter:0},
+                    {tit: '我赞同现行规定，几乎不抱怨',select:-1,alter:0},
+                ],
+                question2: [
+                    {tit: '我认为王健林马云马化腾很富有，更多可能是因为：',a:'机遇抓取能力和卓越的团队领导力',b:'眼界执行力和承担风险的决心',c:'成功后的资本马太效应',d:'比一般人更多的努力',select:-1,alter:0},
+                    {tit: '我认为成长到今天，我大部分人生旅程是：',a:'很快乐的',b:'一般和平淡的',c:'有一些不公和委屈的',d:'有很多遗憾的',select:-1,alter:0},
+                    {tit: '我对我后面三年的收入提升，更多是：',a:'很有信心的',b:'需要时机和运势以及努力的',c:'抱希望但稳定也非常重要的',d:'我会努力，领导会认可的',select:-1,alter:0},
+                    {tit: '我来应聘之前对压寨的了解是：',a:'来之前对压寨了解过，挺多的',b:'从没听说过，也没了解过的',c:'这个不是最重要的，重要的是个人能力',d:'因为这是个好的行业，想进入',select:-1,alter:0},
+                    {tit: '压寨团队给我回报如果变多，一定是因为：',a:'我付出了更多的努力',b:'我的工作成果明显有更多的价值',c:'我的个人能力有明显的成长',d:'公司发展了自然员工都会更好',select:-1,alter:0},
+                    {tit: '我觉得团队配合与关系很重要，一定是因为：',a:'同事间像家般的温暖对员工感受非常重要',b:'找到1+1>2的团队组合才能让工作效率提高',c:'团队气氛好是工作努力的关键之一',d:'同事关系不好离职率肯定上升',select:-1,alter:0},
+                    {tit: '我觉得最好的社会分配方式是：',a:'按劳分配',b:'按需分配',c:'按资本分配',d:'按贡献分配',select:-1,alter:0},
+                ]
+            },
+            methods: {
+                sel1 : function (index,sel) {
+                    if (this.question[index].alter == 1 && this.question[index].select != sel) {
+                        alert("已选择的题目不能进行更改哦！");
+                        return ;
+                    }
+                    Vue.set(this.question[index],'select',sel);
+                    Vue.set(this.question[index],'alter',1);
+                },
+                sel2 : function (index,sel) {
+                    if (this.question2[index].alter == 1 && this.question2[index].select != sel) {
+                        alert("已选择的题目不能进行更改哦！");
+                        return ;
+                    }
+                    Vue.set(this.question2[index],'select',sel);
+                    Vue.set(this.question2[index],'alter',1);
+                },
+                sub: function () {
+                    var _this = this;
+                    var flag = false;
+                    var answers = {};
+                    if (this.sex == -1) {
+                        alert('请选择你的性别！');
+                        return ;
+                    }
+                    for(var i = 0; i < this.question.length; i++) {
+                        if(this.question[i].select == -1) {
+                            flag = true;
+                            break;
+                        }
+                        
+                    }
+                    for(var i = 0; i < this.question2.length; i++) {
+                        if(this.question2[i].select == -1) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        alert('您还有题目未回答完成哦！');
+                        return ;
+                    }
+                    for(var i = 0; i < this.question.length; i++) {
+                        answers[(i+1)] = this.question[i].select + '';
+                    }
+                    for(var i = 0; i < this.question2.length; i++) {
+                        var nowans = [0,this.question2[i].a,this.question2[i].b,this.question2[i].c,this.question2[i].d];
+                        answers[(i+65)] = this.question2[i].select + '-' + nowans[this.question2[i].select];
+                    }
+                    var json = {};
+                    json.answer = answers;
+                    json.sex = _this.sex + '';
+                    json.name = _this.name;
+                    json.job = _this.position;
+                    json = JSON.stringify(json);
+                    console.log(json);
+                    $.ajax({
+                        url: 'http://120.77.153.189:9095/hr/nature/sub',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            json: json,
+                            hash: _this.hash + '',
+                        },
+                        success: function (res1) {
+                            // var res = JSON.parse(res1);
+                            console.log(res1);
+                            if (res1.code == 1) {
+                                _this.msg = '提交成功';
+                                _this.show = false;
+                            }else {
+                                alert(res1.msg);
+                            }
+                        },
+                        error: function () {
+                            console.log("state请求错误");
+                        }
+                    });
+                    // $ip = 'http://192.168.1.76/nature/12345';
+                    // $ip2 = 'http://192.168.1.76/nature/sub'
+                }
+            },
+            mounted: function() {
+                var _this = this;
+                var bbb=location.href;
+                function url_get_params(url_path){
+                    var url = url_path;
+                    var theRequest = new Object();
+                    if (url.indexOf("?") != -1) {
+                        var str = url.substr(url.indexOf("?")+1);
+                        strs = str.split("&");
+                        for(var i = 0; i < strs.length; i ++) {
+                            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+                        }
+                    }
+                    return theRequest;
+                }
+                var data = url_get_params(bbb);
+                _this.hash = data.hash;
+                console.log('120.77.153.189:9095/hr/nature/' + _this.hash);
+                $.ajax({
+                    url: 'http://120.77.153.189:9095/hr/nature/' + _this.hash,
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        if(res.code != 1) {
+                            _this.msg = res.msg;
+                            _this.show = false;
+                        }
+                        _this.name = res.nickname;
+                        _this.position = res.job;
+                    },
+                    error: function () {
+                        console.log("state请求错误");
+                    }
+                });
+            },
+            filters: {
+                
+            }
+        });
+    </script>
+</html>
